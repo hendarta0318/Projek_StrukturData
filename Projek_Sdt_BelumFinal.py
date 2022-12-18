@@ -14,6 +14,7 @@ class antrean :
         self.sekarang = 0
         self.nama = []
         self.NIK = []
+        self.swab = []
 
     def menu(self) :
         os.system("cls")
@@ -47,27 +48,29 @@ class antrean :
         else :
            return False
 
-    def enqueue(self, nama, NIK) :
+    def enqueue(self, nama, NIK, swab) :
         self.nama.append(nama)
         self.NIK.append(NIK)
+        self.swab.append(swab)
         self.sekarang = len(self.nama)
-        print("Antrian atas Nama ", nama, "Dengan No NIK", NIK, "Berhasil Ditambahkan")
+        print("Antrian atas Nama ", nama, "Dengan No NIK", NIK, "Swab Yang Dipilih Yaitu", swab, "Berhasil Ditambahkan")
         print("Silahkan Menempati Tempat Duduk Yang Sudah Disediakan")
 
     def dequeue(self,) :
         dta_nama = self.nama.pop(0)
         dta_NIK = self.NIK.pop(0)
+        dta_swab = self.swab.pop(0)
         self.sekarang = len(self.nama)
         self.sekarang - len(self.NIK)
-        print("Antrian Atas Nama ", dta_nama, "Dengan No NIK", dta_NIK)
+        print("Antrian Atas Nama", dta_nama, "Dengan No NIK", dta_NIK, "Swab Yang Dipilih Yaitu", dta_swab)
         print("Dipersiahkan Masuk Keruangan")
 
     def visual_data(self) :
         os.system("cls")
         print("\t\t\tDATA PASIEN SWAB\n")
-        for i in range(self.ukuran) :
-           print("    [%2d]    "%(self.ukuran-1), end = "")
-        print()
+      #   for i in range(self.ukuran) :
+      #      print("    [%2d]    "%(self.ukuran-1), end = "")
+      #   print()
         for i in range(self.ukuran) :
            print("===========", end = "")
         print()
@@ -78,17 +81,26 @@ class antrean :
                 print(" %10s "%(""), end = "")
            else :
                 print(" %10s "%(self.nama[self.ukuran-1-i]), end = "")
-
         print(">>[NAMA]", end = "")
         print()
+
         posisi_kosong =self.ukuran - self.sekarang
         for i in range(self.ukuran) :
            if i < posisi_kosong :
                 print(" %10s "%(""), end = "")
            else :
                 print(" %10s "%(self.NIK[self.ukuran - 1 - i]), end = "")
-
         print(">>[NIK]", end = "")
+        print()
+
+        posisi_kosong =self.ukuran - self.sekarang
+        for i in range(self.ukuran) :
+           if i < posisi_kosong :
+                print(" %10s "%(""), end = "")
+           else :
+                print(" %10s "%(self.swab[self.ukuran - 1 - i]), end = "")
+
+        print(">>[Jenis Swab]", end = "")
         print()
 
         posisi_kosong = self.ukuran - self.sekarang
@@ -154,7 +166,8 @@ class antrean :
         else :
            nama = input("Masukkan Nama : ")
            NIK = input("Masukkan NIK : ")
-           self.enqueue(nama, NIK)
+           swab = input("Masukkan Jenis Swab Yang Diinginkan : ")
+           self.enqueue(nama, NIK, swab)
         input()
         self.menu()
 
